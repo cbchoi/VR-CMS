@@ -6,19 +6,28 @@
  */
 AFRAME.registerComponent('navigate', {
     schema: {
-        on: {type: 'string'},
         url: {type: 'string'},
     },
 
+/*
     init: function () {
         var data = this.data;
         var el = this.el;
 
-        el.addEventListener(data.on, function (event) {
+        this.el.addEventListener('click', function (event) {
             event.preventDefault();
             // Fade out image.
             window.location = data.url;
             // Wait for fade to complete.
         });
-    },
+    },*/
+    init: function () {
+    var lastIndex = -1;
+    var COLORS = ['red', 'green', 'blue'];
+    this.el.addEventListener('click', function (evt) {
+      lastIndex = (lastIndex + 1) % COLORS.length;
+      this.setAttribute('material', 'color', COLORS[lastIndex]);
+      console.log('I was clicked at: ', evt.detail.intersection.point);
+    });
+  }
 });

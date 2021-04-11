@@ -1,3 +1,4 @@
+
 doctype html
 html
     head
@@ -9,15 +10,16 @@ html
         script(src='/javascripts/aframe-tooltip-component.js')
         script(src='/javascripts/camera-position.js')
         script(src='/javascripts/link-controls.js')
+        script(src='/javascripts/curnav.js')
         
     body
+        //a-scene(raycaster='far: 100; objects: [link];'  camera-position='')
         a-scene(raycaster='far: 100; objects: [link];' cursor='rayOrigin: mouse' camera-position='')
             a-assets
                 img#left(src='/images/left.png')
                 img#up(src='/images/up.png')
                 img#right(src='/images/right.png')
                 img#down(src='/images/down.png')
-                img#thumbCity(crossorigin='anonymous' src='https://cdn.aframe.io/link-traversal/thumbs/city.png')
 
 
             if vrimage_id != null
@@ -28,18 +30,19 @@ html
             //a-link(href='city.html' position='-3.5 1.5 -1.0' image='#thumbCity')
 
             if arrowList.left
-                a-link(href='http://localhost:3000/vr/scene/'+ arrowList.left position='-6 1.5 0' rotation='0 90 0' image: '#left')
+                a-link(title=arrowList.left href='http://localhost:3000/vr/scene/'+ arrowList.left position='-6 1.5 0' rotation='0 90 0')
 
             if arrowList.up
-                a-link(href='http://localhost:3000/vr/scene/'+ arrowList.up position='0 1.5 6' image: '#up')
+                a-link(title=arrowList.up href='http://localhost:3000/vr/scene/'+ arrowList.up position='0 1.5 6' image: '#up')
 
             if arrowList.right
-                a-link(href='http://localhost:3000/vr/scene/'+ arrowList.right position='6 1.5 0' rotation='0 90 0' image: '#right')
+                a-link(title=arrowList.right href='http://localhost:3000/vr/scene/'+ arrowList.right position='6 1.5 0' rotation='0 90 0')
 
             if arrowList.down
-                a-link(href='http://localhost:3000/vr/scene/'+ arrowList.down position='0 1.5 -6' rotation='0 0 0' image: '#down')
+                a-link(title=arrowList.down href='http://localhost:3000/vr/scene/'+ arrowList.down position='0 1.5 -6' rotation='0 0 0')
 
             a-entity#leftHand(link-controls='hand: left')
             a-entity#rightHand(link-controls='hand: right')
-
         
+            //a-entity(camera='' look-controls='')
+            //    a-entity(cursor='rayOrigin: mouse; fuse: true; fuseTimeout: 5000' position='0 0 -1' geometry='primitive: ring; radiusInner: 0.02; radiusOuter: 0.03' material='color: black; shader: flat')
