@@ -27,7 +27,7 @@ html
                 a-link.clickable(title=arrowList.left href='http://localhost:3000/vr/scene/'+ arrowList.left position='-6 1.5 0' rotation='0 90 0')
 
             if arrowList.up
-                a-link.clickable(title=arrowList.up href='http://localhost:3000/vr/scene/'+ arrowList.up position='0 1.5 6' image: '#up')
+                a-link.clickable(title=arrowList.up href='http://localhost:3000/vr/scene/'+ arrowList.up position='0 1.5 6' )
 
             if arrowList.right
                 a-link.clickable(title=arrowList.right href='http://localhost:3000/vr/scene/'+ arrowList.right position='6 1.5 0' rotation='0 90 0')
@@ -35,7 +35,7 @@ html
             if arrowList.down
                 a-link.clickable(title=arrowList.down href='http://localhost:3000/vr/scene/'+ arrowList.down position='0 1.5 -6' rotation='0 0 0')
 
-            a-box.clickable(navigate height=0.5 width=0.5 position="0 -2 -2")
+            a-box.clickable(navigate='image_id:'+ vrimage_id height=0.5 width=0.5 position="0 -2 -2")
             a-entity#leftHand(link-controls='hand: left')
             a-entity#rightHand(link-controls='hand: right')
         

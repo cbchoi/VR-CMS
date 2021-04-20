@@ -68,4 +68,11 @@ router.get("/image/:image_id", (req, res) => {
     });
 });
 
+router.post("/vr/scene_update/:id", (req, res)=>{
+  console.log(id, req.params);
+});
+
+router.get("/vr/scene_update/:id", (req, res)=>{
+  console.log(id, req.params);
+});
 module.exports = router;
