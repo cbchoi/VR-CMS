@@ -56,10 +56,10 @@ router.post('/add_item', async (req, res) => {
         vritem.region_id = new mongoose.Types.ObjectId(body.vrid);
         vritem.scene_name = body.SceneName;
         vritem.image_file = req.file.id;
-        vritem.left_name = body.leftPos;
-        vritem.up_name = body.upPos;
-        vritem.right_name = body.rightPos;
-        vritem.down_name = body.downPos;
+        vritem.links = {left:{name:body.leftPos, x:-6, y:1.5, z:0, yaw:0, pitch:90, roll:0},
+                        up:{name:body.upPos, x:0, y:1.5, z:6, yaw:0, pitch:0, roll:0},
+                        right:{name:body.rightPos, x:6, y:1.5, z:0, yaw:0, pitch:-90, roll:0},
+                        down:{name:body.downPos, x:0, y:1.5, z:-6, yaw:0, pitch:0, roll:0}} 
 
         vritem.save(function (err) {
             if (err) {
@@ -165,10 +165,10 @@ router.get('/update_vr/:id', async (req, res) => {
 router.post('/update_vr', function (req, res) {
     var body = req.body;
     VRItem.findOne({_id:req.body.SceneID}, function(error, vritem){
-        vritem.left_name    = req.body.leftPos;
-        vritem.up_name      = req.body.upPos;
-        vritem.right_name   = req.body.rightPos;
-        vritem.down_name    = req.body.downPos;
+        vritem.links.left.name    = req.body.leftPos;
+        vritem.links.up.name      = req.body.upPos;
+        vritem.links.right.name   = req.body.rightPos;
+        vritem.links.down.name    = req.body.downPos;
         
         vritem.save(function (err) {
             if (err) {

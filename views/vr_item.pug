@@ -1,3 +1,4 @@
+
 doctype html
 html
     head
@@ -9,16 +10,11 @@ html
         script(src='/javascripts/aframe-tooltip-component.js')
         script(src='/javascripts/camera-position.js')
         script(src='/javascripts/link-controls.js')
+        script(src='/javascripts/contents-save.js')
         
     body
-        a-scene(raycaster='far: 100; objects: [link];' cursor='rayOrigin: mouse' camera-position='')
-            a-assets
-                img#left(src='/images/left.png')
-                img#up(src='/images/up.png')
-                img#right(src='/images/right.png')
-                img#down(src='/images/down.png')
-                img#thumbCity(crossorigin='anonymous' src='https://cdn.aframe.io/link-traversal/thumbs/city.png')
-
+        //a-scene(raycaster='far: 100; objects: [link, box];'  camera-position='')
+        a-scene(raycaster='far: 100; objects: .clickable;' cursor='rayOrigin: mouse' camera-position='')
 
             if vrimage_id != null
                 a-sky#image-360(radius='30', src='image/' + vrimage_id)
@@ -27,19 +23,26 @@ html
             
             //a-link(href='city.html' position='-3.5 1.5 -1.0' image='#thumbCity')
 
-            if arrowList.left
-                a-link(href='http://localhost:3000/vr/scene/'+ arrowList.left position='-6 1.5 0' rotation='0 90 0' image: '#left')
+            if arrowList.left.name
+                a-link.clickable(title=arrowList.left.name href='scene/'+ arrowList.left.name loc='left' position='' + arrowList.left.x + ' '+ arrowList.left.y + ' '+ arrowList.left.z rotation='' + arrowList.left.yaw + ' ' + arrowList.left.pitch + ' ' + arrowList.left.roll)
 
-            if arrowList.up
-                a-link(href='http://localhost:3000/vr/scene/'+ arrowList.up position='0 1.5 6' image: '#up')
+            if arrowList.up.name
+                //a-link.clickable(title=arrowList.up.name href='scene/'+ arrowList.up loc='up' position='0 1.5 6' )
+                a-link.clickable(title=arrowList.up.name href='scene/'+ arrowList.up.name loc='up' position='' + arrowList.up.x + ' '+ arrowList.up.y + ' '+ arrowList.up.z rotation='' + arrowList.up.yaw + ' ' + arrowList.up.pitch + ' ' + arrowList.up.roll)
 
-            if arrowList.right
-                a-link(href='http://localhost:3000/vr/scene/'+ arrowList.right position='6 1.5 0' rotation='0 90 0' image: '#right')
+            if arrowList.right.name
+                //a-link.clickable(title=arrowList.right.name href='scene/'+ arrowList.right loc='right' position='6 1.5 0' rotation='0 90 0')
+                a-link.clickable(title=arrowList.right.name href='scene/'+ arrowList.right.name loc='right' position='' + arrowList.right.x + ' '+ arrowList.right.y + ' '+ arrowList.right.z rotation='' + arrowList.right.yaw + ' ' + arrowList.right.pitch + ' ' + arrowList.right.roll)
 
-            if arrowList.down
-                a-link(href='http://localhost:3000/vr/scene/'+ arrowList.down position='0 1.5 -6' rotation='0 0 0' image: '#down')
+            if arrowList.down.name
+                //a-link.clickable(title=arrowList.down.name href='scene/'+ arrowList.down loc='down' position='0 1.5 -6' rotation='0 0 0')
+                a-link.clickable(title=arrowList.down.name href='scene/'+ arrowList.down.name loc='down' position='' + arrowList.down.x + ' '+ arrowList.down.y + ' '+ arrowList.down.z rotation='' + arrowList.down.yaw + ' ' + arrowList.down.pitch + ' ' + arrowList.down.roll)
 
+            a-text(font="kelsonsans" value="Save" width="6" position="-0.3 -1.5 -2")
+
+            a-box.clickable(navigate='scene_id:' + vid height=0.5 width=0.5 position="0 -2 -2" color='red')
             a-entity#leftHand(link-controls='hand: left')
             a-entity#rightHand(link-controls='hand: right')
-
         
+            //a-entity(camera='' look-controls='')
+            //    a-entity(cursor='rayOrigin: mouse; fuse: true; fuseTimeout: 5000' position='0 0 -1' geometry='primitive: ring; radiusInner: 0.02; radiusOuter: 0.03' material='color: black; shader: flat')
