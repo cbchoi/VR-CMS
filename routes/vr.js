@@ -46,7 +46,7 @@ router.get('/:vid', function(req, res) {
           var linkList = vritem.links;
         }
         console.log(linkList);
-        return res.render("vr_item", { vrimage_id: vritem.image_file, arrowList:linkList });
+        return res.render("vr_item", { vid:req.params.vid, vrimage_id: vritem.image_file, arrowList:linkList });
     })
 });
 
@@ -80,11 +80,65 @@ router.get("/image/:image_id", (req, res) => {
 });
 
 router.put("/scene_update/:id", (req, res)=>{
-  console.log(req.params.id, req.params);
+
+  VRItem.findOne({_id: req.params.id}, function (err, item) {
+    
+    if("left" in req.body)
+    {
+      item.links.left.x = req.body.left[0]['x'];
+      item.links.left.y = req.body.left[0]['y'];
+      item.links.left.z = req.body.left[0]['z'];
+
+      item.links.left.yaw   = req.body.left[1]['x'];
+      item.links.left.pitch = req.body.left[1]['y'];
+      item.links.left.roll  = req.body.left[1]['z'];
+    }
+
+    if("right" in req.body)
+    {
+      item.links.right.x = req.body.right[0]['x'];
+      item.links.right.y = req.body.right[0]['y'];
+      item.links.right.z = req.body.right[0]['z'];
+
+      item.links.right.yaw   = req.body.right[1]['x'];
+      item.links.right.pitch = req.body.right[1]['y'];
+      item.links.right.roll  = req.body.right[1]['z'];
+    }
+
+    if("up" in req.body)
+    {
+      item.links.up.x = req.body.up[0]['x'];
+      item.links.up.y = req.body.up[0]['y'];
+      item.links.up.z = req.body.up[0]['z'];
+
+      item.links.up.yaw   = req.body.up[1]['x'];
+      item.links.up.pitch = req.body.up[1]['y'];
+      item.links.up.roll  = req.body.up[1]['z'];
+    }
+
+    if("down" in req.body)
+    {
+      item.links.down.x = req.body.down[0]['x'];
+      item.links.down.y = req.body.down[0]['y'];
+      item.links.down.z = req.body.down[0]['z'];
+
+      item.links.down.yaw   = req.body.down[1]['x'];
+      item.links.down.pitch = req.body.down[1]['y'];
+      item.links.down.roll  = req.body.down[1]['z'];
+    }      
+  
+    item.save(function (err) {
+        if (err) {
+            console.error(err);
+            res.send(err);
+            return;
+        }
+    });      
+  });
+  
+  
+  
   return res.send('updated');
 });
 
-router.get("/scene_update/:id", (req, res)=>{
-  console.log(req.params.id, req.params);
-});
 module.exports = router;
