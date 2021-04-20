@@ -61,6 +61,11 @@ router.post('/add_item', async (req, res) => {
         vritem.right_name = body.rightPos;
         vritem.down_name = body.downPos;
 
+        vritem.links = {left:{name:body.leftPos, x:-6, y:1.5, z:0, yaw:0, pitch:90, roll:0},
+                        up:{name:body.upPos, x:0, y:1.5, z:6, yaw:0, pitch:0, roll:0},
+                        right:{name:body.rightPos, x:6, y:1.5, z:0, yaw:0, pitch:-90, roll:0},
+                        down:{name:body.downPos, x:0, y:1.5, z:-6, yaw:0, pitch:0, roll:0}} 
+
         vritem.save(function (err) {
             if (err) {
                 console.error(err);
