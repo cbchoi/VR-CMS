@@ -4,7 +4,7 @@
  * Component that listens to an event, fades out an entity, swaps the texture, and fades it
  * back in.
  */
-AFRAME.registerComponent('navigate', {
+AFRAME.registerComponent('contents-save', {
     schema: {
         scene_id: {type: 'string', default:"hello"},
     },
